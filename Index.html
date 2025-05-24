@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Pelayanan & Data Gereja</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        .form-container {
+            max-width: 800px;
+            margin: auto;
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            text-align: center;
+            color: #333;
+        }
+        .form-section {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        .form-section:last-child {
+            border-bottom: none;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .checkbox-group label {
+            display: inline-block;
+            margin-right: 15px;
+            font-weight: normal;
+        }
+         .checkbox-group input[type="checkbox"] {
+            margin-right: 5px;
+         }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        button[type="submit"] {
+            background-color: #28a745;
+        }
+         button[type="submit"]:hover {
+            background-color: #218838;
+        }
+        .hidden {
+            display: none;
+        }
+         #loading {
+            text-align: center;
+            font-style: italic;
+         }
+         #successMessage, #errorMessage {
+            text-align: center;
+            font-weight: bold;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 5px;
+         }
+         #successMessage {
+             background-color: #d4edda;
+             color: #155724;
+         }
+          #errorMessage {
+             background-color: #f8d7da;
+             color: #721c24;
+         }
+         /* Simple input styling within table */
+        td input[type="text"],
+        td input[type="number"],
+        td input[type="date"] {
+            width: 90%;
+            padding: 5px;
+            margin-bottom: 0;
+            border: 1px solid #eee;
+        }
+         td input:focus {
+            outline: 1px solid #007bff;
+         }
+
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <form id="laporanForm">
+
+        <div id="halaman1">
+            <h1>LAPORAN PELAYANAN</h1>
+
+            <div class="form-section">
+                <h3>I. Status Pelayanan:</h3>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="status_pelayanan" value="Guspel"> Gugus Pelayanan (Guspel).</label><br>
+                    <label><input type="checkbox" name="status_pelayanan" value="Gerbang"> Gereja Cabang (Gerbang).</label><br>
+                    <label><input type="checkbox" name="status_pelayanan" value="Jemaat"> Jemaat.</label>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>II. Petugas Pelayanan:</h3>
+                 <div class="checkbox-group">
+                    <label><input type="checkbox" name="petugas_pelayanan" value="Pendeta"> Pendeta</label><br>
+                    <label><input type="checkbox" name="petugas_pelayanan" value="Evangelis"> Evangelis</label><br>
+                    <label><input type="checkbox" name="petugas_pelayanan" value="Lainnya"> Lainnya: <input type="text" name="petugas_lainnya" style="width: 150px; display: inline;"></label>
+                 </div>
+            </div>
+
+            <div class="form-section">
+                <h3>III. Kegiatan Pelayanan:</h3>
+                <h4>A. Ibadah Minggu Raya.</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>NO</th>
+                            <th>IBADAH RAYA</th>
+                            <th>KEHADIRAN JEMAAAT (Orang)</th>
+                            <th>PEMBICARA</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Minggu I</td>
+                            <td><input type="number" name="hadir_minggu1"></td>
+                            <td><input type="text" name="pembicara_minggu1"></td>
+                        </tr>
+                         <tr>
+                            <td>2</td>
+                            <td>Minggu II</td>
+                            <td><input type="number" name="hadir_minggu2"></td>
+                            <td><input type="text" name="pembicara_minggu2"></td>
+                        </tr>
+                         <tr>
+                            <td>3</td>
+                            <td>Minggu III</td>
+                            <td><input type="number" name="hadir_minggu3"></td>
+                            <td><input type="text" name="pembicara_minggu3"></td>
+                        </tr>
+                         <tr>
+                            <td>4</td>
+                            <td>Minggu IV</td>
+                            <td><input type="number" name="hadir_minggu4"></td>
+                            <td><input type="text" name="pembicara_minggu4"></td>
+                        </tr>
+                         <tr>
+                            <td>5</td>
+                            <td>Minggu V (Jika ada)</td>
+                            <td><input type="number" name="hadir_minggu5"></td>
+                            <td><input type="text" name="pembicara_minggu5"></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>B. Kegiatan Ibadah Lainnya.</h4>
+                 <table>
+                    <thead>
+                        <tr>
+                            <th>NO</th>
+                            <th>JENIS KEGIATAN</th>
+                            <th>KEHADIRAN JEMAAAT (Orang)</th>
+                            <th>TGL PELAKSANAAN</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Perjamuan Kudus</td>
+                            <td><input type="number" name="hadir_perjamuan"></td>
+                            <td><input type="date" name="tgl_perjamuan"></td>
+                        </tr>
+                         <tr>
+                            <td>2</td>
+                            <td>Baptisan</td>
+                            <td><input type="number" name="hadir_baptisan"></td>
+                            <td><input type="date" name="tgl_baptisan"></td>
+                        </tr>
+                         <tr>
+                            <td>3</td>
+                            <td>Sidi Jemaat</td>
+                            <td><input type="number" name="hadir_sidi"></td>
+                            <td><input type="date" name="tgl_sidi"></td>
+                        </tr>
+                         <tr>
+                            <td>4</td>
+                            <td>Pers. Kategorial</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                         <tr>
+                            <td></td>
+                            <td>&bull; Sekolah Minggu</td>
+                            <td><input type="number" name="hadir_sekolah_minggu"></td>
+                            <td><input type="text" name="tgl_sekolah_minggu" placeholder="Hari/Waktu"></td>
+                        </tr>
+                         <tr>
+                            <td></td>
+                            <td>&bull; Remaja/Pemuda</td>
+                            <td><input type="number" name="hadir_remaja"></td>
+                            <td><input type="text" name="tgl_remaja" placeholder="Hari/Waktu"></td>
+                        </tr>
+                         <tr>
+                            <td></td>
+                            <td>&bull; Kaum Pria</td>
+                            <td><input type="number" name="hadir_pria"></td>
+                            <td><input type="text" name="tgl_pria" placeholder="Hari/Waktu"></td>
+                        </tr>
+                         <tr>
+                            <td></td>
+                            <td>&bull; Kaum Wanita</td>
+                            <td><input type="number" name="hadir_wanita"></td>
+                            <td><input type="text" name="tgl_wanita" placeholder="Hari/Waktu"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="button-container">
+                <button type="button" onclick="nextPage()">Next</button>
+            </div>
+        </div>
+
+        <div id="halaman2" class="hidden">
+            <h1>DATA GEDUNG GEREJA DAN TANAH</h1>
+
+            <div class="form-section">
+                <h3>B. Status Tanah Gereja:</h3>
+                 <div class="checkbox-group">
+                    <label><input type="checkbox" name="status_tanah" value="Belum Milik Sendiri"> Belum memiliki tanah sendiri</label><br>
+                    <label><input type="checkbox" name="status_tanah" value="Pinjaman"> Pinjaman, sampai kapan? <input type="text" name="pinjaman_sampai" style="width: 150px; display: inline;"></label><br>
+                    <label><input type="checkbox" name="status_tanah" value="Milik GPII Girik"> Milik GPII, Status Girik atau atas nama orang lain?</label><br>
+                    <label><input type="checkbox" name="status_tanah" value="Milik Sendiri GPII"> Milik sendiri atas nama GPII</label>
+                 </div>
+            </div>
+
+            <div class="form-section">
+                <h3>C. Kondisi Gedung Gereja:</h3>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="kondisi_gedung" value="Masih Kontrak"> Masih Kontrak</label><br>
+                    <label><input type="checkbox" name="kondisi_gedung" value="Dipinjamkan ke GPII"> Dipinjamkan ke GPII</label><br>
+                    <label><input type="checkbox" name="kondisi_gedung" value="Semi Permanen Milik Sendiri"> Semi Permanen milik sendiri</label><br>
+                    <label><input type="checkbox" name="kondisi_gedung" value="Permanen Milik Sendiri"> Permanen milik sendiri</label>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>D. Kelengkapan Pelayanan:</h3>
+                <div class="checkbox-group">
+                   <label><input type="checkbox" name="pastori" value="Tersedia"> Tersedia Pastori</label> /
+                   <label><input type="checkbox" name="pastori" value="Belum"> Belum</label><br>
+                   <label><input type="checkbox" name="kendaraan" value="Tersedia"> Tersedia kendaraan</label> /
+                   <label><input type="checkbox" name="kendaraan" value="Belum"> Belum</label><br>
+                </div>
+                <label for="sarana">Sarana pelayanan; apa yang sudah ada dan yang belum tersedia:</label>
+                <textarea id="sarana" name="sarana" rows="4"></textarea>
+            </div>
+
+             <div class="button-container">
+                <button type="button" onclick="prevPage()">Previous</button>
+                <button type="submit">Kirim Laporan Pelayanan</button>
+            </div>
+
+            <div id="loading" class="hidden">Mengirim data...</div>
+            <div id="successMessage" class="hidden">Laporan berhasil dikirim!</div>
+            <div id="errorMessage" class="hidden">Gagal mengirim laporan. Coba lagi.</div>
+        </div>
+    </form>
+</div>
+
+<script>
+    const halaman1 = document.getElementById('halaman1');
+    const halaman2 = document.getElementById('halaman2');
+    const form = document.getElementById('laporanForm');
+    const loadingDiv = document.getElementById('loading');
+    const successMessage = document.getElementById('successMessage');
+    const errorMessage = document.getElementById('errorMessage');
+
+    // !!! PENTING: Ganti URL ini dengan URL Web App Google Apps Script Anda !!!
+    const scriptURL = 'MASUKKAN_URL_WEB_APP_ANDA_DI_SINI';
+
+    function nextPage() {
+        halaman1.classList.add('hidden');
+        halaman2.classList.remove('hidden');
+        window.scrollTo(0, 0); // Gulir ke atas halaman
+    }
+
+    function prevPage() {
+        halaman2.classList.add('hidden');
+        halaman1.classList.remove('hidden');
+        window.scrollTo(0, 0); // Gulir ke atas halaman
+    }
+
+    form.addEventListener('submit', e => {
+        e.preventDefault(); // Mencegah form submit secara default
+
+        loadingDiv.classList.remove('hidden');
+        successMessage.classList.add('hidden');
+        errorMessage.classList.add('hidden');
+        
+        // Mengumpulkan data checkbox
+        const formData = new FormData(form);
+        const data = {};
+        
+        // Loop melalui semua input
+        for (let [key, value] of formData.entries()) {
+            // Jika key sudah ada (untuk checkbox), tambahkan value
+            if (data[key]) {
+                if (Array.isArray(data[key])) {
+                    data[key].push(value);
+                } else {
+                    data[key] = [data[key], value];
+                }
+            } else {
+                data[key] = value;
+            }
+        }
+        
+        // Ubah array jadi string comma-separated
+        for (let key in data) {
+            if (Array.isArray(data[key])) {
+                data[key] = data[key].join(', ');
+            }
+        }
+
+        // Tambahkan timestamp
+        data['timestamp'] = new Date().toLocaleString("id-ID", {timeZone: "Asia/Makassar"});
+
+        // Kirim data menggunakan fetch API
+        fetch(scriptURL, { method: 'POST', body: JSON.stringify(data), headers: {'Content-Type': 'application/json'} })
+            .then(response => {
+                loadingDiv.classList.add('hidden');
+                if (response.ok) {
+                    successMessage.classList.remove('hidden');
+                    form.reset(); // Reset form setelah berhasil
+                    prevPage(); // Kembali ke halaman 1
+                } else {
+                   return response.text().then(text => { throw new Error(text) });
+                }
+            })
+            .catch(error => {
+                loadingDiv.classList.add('hidden');
+                errorMessage.classList.remove('hidden');
+                console.error('Error!', error.message);
+                errorMessage.textContent = 'Gagal mengirim laporan: ' + error.message;
+            });
+    });
+</script>const scriptURL = https://script.google.com/macros/s/AKfycbxNhCMXbYIvaNx5gIQt_TOYGtWYJF73TxU3FN4tf9y_ifA7cnSUtVThjG2Hd7g193KF/exec;
+
+</body>
+</html>
